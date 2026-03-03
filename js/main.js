@@ -393,3 +393,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initStarCollision();
 
     console.log('ARGHAN TECH Portal Initialized.');
+});
