@@ -605,18 +605,54 @@ nav .nav-inner {
 
 .dynamic-brand-text {
     position: absolute;
+    display: flex;
+    gap: 0.15em;
     white-space: nowrap;
-    font-size: 2.5rem;
+    pointer-events: none;
+    z-index: 50;
+    transform: translate(-50%, -50%);
+}
+
+.brand-word {
+    display: flex;
+    gap: 0.15em;
+    margin-right: 0.5em;
+    /* Space between words */
+}
+
+.letter-particle {
+    display: inline-block;
+    font-size: 2.2rem;
     font-weight: 900;
     color: white;
     text-transform: uppercase;
-    letter-spacing: 0.5em;
+    text-shadow: 0 0 15px rgba(99, 102, 241, 0.8);
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
-    text-shadow: 0 0 30px rgba(99, 102, 241, 1);
-    pointer-events: none;
-    z-index: 50;
-    text-align: center;
+    filter: blur(5px);
+}
+
+.letter-particle.assemble {
+    animation: letterSnap 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes letterSnap {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(0.2) rotate(45deg);
+    }
+
+    30% {
+        opacity: 1;
+        filter: blur(2px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: scale(1) rotate(0deg);
+        text-shadow: 0 0 20px var(--accent-indigo);
+    }
 }
 
 .dynamic-brand-text.reveal {
@@ -626,33 +662,13 @@ nav .nav-inner {
 @keyframes textMaterialize {
     0% {
         opacity: 0;
-        letter-spacing: 1em;
-        filter: blur(10px);
-        transform: translate(-50%, -50%) scale(0.5);
-    }
-
-    20% {
-        opacity: 1;
-        filter: blur(0px);
-        transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    30% {
-        transform: translate(-50%, -50%) scale(1);
-        letter-spacing: 0.3em;
-    }
-
-    80% {
-        opacity: 1;
-        filter: blur(0px);
-        letter-spacing: 0.3em;
     }
 
     100% {
         opacity: 0;
-        filter: blur(10px);
-        letter-spacing: 0.1em;
     }
+
+    /* We handle this via children now */
 }
 
 @keyframes flashIn {

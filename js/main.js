@@ -308,86 +308,95 @@ document.addEventListener('DOMContentLoaded', () => {
             const w = rect.width;
             const h = rect.height;
 
-            // 1. Pick a safe Impact Point (tx, ty) 
-            // Avoid top-left (0-40% width, 0-60% height) where hero text usually sits
+            // 1. Pick a safe Impact Point (tx, ty)
             let tx, ty;
             do {
                 tx = Math.random() * w;
                 ty = Math.random() * h;
             } while (tx < w * 0.4 && ty < h * 0.6);
 
-            // 2. Spawn 2 Coliding Stars
+            // 2. Spawn exactly 2 Collider Stars
             const collisionStars = [];
             for (let i = 0; i < 2; i++) {
-                // Spawn on a large perimeter
                 const angle = Math.random() * Math.PI * 2;
-                const dist = 1000;
+                const dist = 1200; // Far start
                 const sx = (w / 2) + Math.cos(angle) * dist;
                 const sy = (h / 2) + Math.sin(angle) * dist;
 
-                collisionStars.push(spawnStar(sx, sy, tx, ty, true));
+                const star = document.createElement('div');
+                star.className = 'star-particle';
+                const rot = Math.atan2(ty - sy, tx - sx) * (180 / Math.PI);
+                star.style.left = `${sx}px`;
+                star.style.top = `${sy}px`;
+                star.style.transform = `rotate(${rot}deg)`;
+                collisionContainer.appendChild(star);
+
+                const travelTime = 1800; // Constant time = constant speed (linear)
+                star.animate([
+                    { left: `${sx}px`, top: `${sy}px`, opacity: 0 },
+                    { opacity: 1, offset: 0.1 },
+                    { left: `${tx}px`, top: `${ty}px`, opacity: 1 }
+                ], {
+                    duration: travelTime,
+                    easing: 'linear', // User requested: speed doesn't slow down
+                    fill: 'forwards'
+                });
+
+                collisionStars.push({ star, time: travelTime });
             }
 
-            // 3. Spawn 3 Decoy Stars (Ambient)
-            for (let i = 0; i < 3; i++) {
-                const angleS = Math.random() * Math.PI * 2;
-                const sx = (w / 2) + Math.cos(angleS) * 1000;
-                const sy = (h / 2) + Math.sin(angleS) * 1000;
-
-                const angleT = Math.random() * Math.PI * 2;
-                const targetX = (w / 2) + Math.cos(angleT) * 1000;
-                const targetY = (h / 2) + Math.sin(angleT) * 1000;
-
-                spawnStar(sx, sy, targetX, targetY, false);
-            }
-
-            // 4. Handle Impact (using most consistent travel time)
+            // 3. Handle Impact & Text Assembly
             const impactTime = collisionStars[0].time;
 
             setTimeout(() => {
-                // Remove stars
                 collisionStars.forEach(s => s.star.remove());
 
-                // Cleanup decoys (rough estimate)
-                setTimeout(() => {
-                    document.querySelectorAll('.star-particle').forEach(s => s.remove());
-                }, 1000);
-
-                // Create Flash
+                // Explosion Visuals
                 const flash = document.createElement('div');
                 flash.className = 'impact-flash';
                 flash.style.left = `${tx}px`;
                 flash.style.top = `${ty}px`;
                 flash.style.transform = 'translate(-50%, -50%)';
-                flash.style.animation = 'flashIn 1.2s ease-out forwards';
+                flash.style.animation = 'flashIn 1s ease-out forwards';
                 collisionContainer.appendChild(flash);
-                setTimeout(() => flash.remove(), 1500);
+                setTimeout(() => flash.remove(), 1200);
 
-                // Create Sparks
-                for (let i = 0; i < 25; i++) {
+                for (let i = 0; i < 35; i++) {
                     const spark = document.createElement('div');
                     spark.className = 'spark';
                     spark.style.left = `${tx}px`;
                     spark.style.top = `${ty}px`;
                     collisionContainer.appendChild(spark);
-
                     const sa = Math.random() * Math.PI * 2;
-                    const sd = 60 + Math.random() * 200;
-
+                    const sd = 80 + Math.random() * 250;
                     spark.animate([
-                        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                        { transform: 'translate(-50%, -50%) scale(1.5)', opacity: 1 },
                         { transform: `translate(${-50 + Math.cos(sa) * sd}px, ${-50 + Math.sin(sa) * sd}px) scale(0)`, opacity: 0 }
-                    ], { duration: 1200 + Math.random() * 600, easing: 'ease-out' }).onfinish = () => spark.remove();
+                    ], { duration: 1000 + Math.random() * 800, easing: 'ease-out' }).onfinish = () => spark.remove();
                 }
 
-                // 5. Reveal Text
+                // Fragmented Text Formation
                 brandContainer.innerHTML = '';
-                const brandText = document.createElement('div');
-                brandText.className = 'dynamic-brand-text reveal';
-                brandText.style.left = `${tx}px`;
-                brandText.style.top = `${ty}px`;
-                brandText.innerText = BRAND_NAME;
-                brandContainer.appendChild(brandText);
+                const brandDiv = document.createElement('div');
+                brandDiv.className = 'dynamic-brand-text';
+                brandDiv.style.left = `${tx}px`;
+                brandDiv.style.top = `${ty}px`;
+
+                const words = BRAND_NAME.split(' ');
+                words.forEach(word => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'brand-word';
+                    [...word].forEach((letter, idx) => {
+                        const letterSpan = document.createElement('span');
+                        letterSpan.className = 'letter-particle assemble';
+                        letterSpan.innerText = letter;
+                        letterSpan.style.animationDelay = `${idx * 0.05}s`;
+                        wordSpan.appendChild(letterSpan);
+                    });
+                    brandDiv.appendChild(wordSpan);
+                });
+
+                brandContainer.appendChild(brandDiv);
 
             }, impactTime);
         }
