@@ -283,12 +283,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const w = rect.width;
             const h = rect.height;
 
-            // 1. Pick a safe Impact Point (tx, ty)
-            let tx, ty;
-            do {
-                tx = Math.random() * w;
-                ty = Math.random() * h;
-            } while (tx < w * 0.4 && ty < h * 0.6);
+            // 1. Pick an Impact Point relative to the tech-core (The Circle)
+            const techCore = document.querySelector('.tech-core');
+            const techCoreRect = techCore.getBoundingClientRect();
+            const collisionRect = collisionContainer.getBoundingClientRect();
+
+            // Calculate tech-core center relative to collisionContainer
+            const centerX = (techCoreRect.left + techCoreRect.width / 2) - collisionRect.left;
+            const centerY = (techCoreRect.top + techCoreRect.height / 2) - collisionRect.top;
+
+            // Add a small randomized offset so it's "around" the circle but not always dead center
+            const tx = centerX + (Math.random() - 0.5) * 100;
+            const ty = centerY + (Math.random() - 0.5) * 100;
 
             // 2. Spawn exactly 2 Collider Stars
             const collisionStars = [];
