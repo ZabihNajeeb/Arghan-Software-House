@@ -13,7 +13,7 @@
     --text-secondary: #94a3b8;
     --glass-border: rgba(255, 255, 255, 0.1);
     --font-main: 'Outfit', sans-serif;
-    --orbit-radius: 300px;
+    --orbit-radius: 312px;
 }
 
 * {
@@ -450,12 +450,12 @@ nav .nav-inner {
 }
 
 .ring-3 {
-    width: 120%;
-    height: 120%;
-    border: 3px dashed rgba(99, 102, 241, 0.6);
+    width: 125%;
+    height: 125%;
+    border: 3px dashed rgba(99, 102, 241, 0.4);
     border-radius: 50%;
     animation: spinReverse 45s linear infinite;
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.1), inset 0 0 30px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.05), inset 0 0 30px rgba(99, 102, 241, 0.05);
 }
 
 .floating-node {
@@ -481,27 +481,113 @@ nav .nav-inner {
 
 .node-1 {
     color: #38bdf8;
-    animation: orbit1 20s linear infinite;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(56, 189, 248, 0.2);
+    animation: orbit1 12s linear infinite;
 }
 
 .node-2 {
     color: var(--accent-purple);
-    animation: orbit2 20s linear infinite;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(168, 85, 247, 0.2);
+    animation: orbit2 15s linear infinite;
 }
 
 .node-3 {
     color: #4ade80;
     animation: orbit3 20s linear infinite;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(74, 222, 128, 0.2);
 }
 
 .node-4 {
     color: #fbbf24;
-    animation: orbit4 20s linear infinite;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(251, 191, 36, 0.2);
+    animation: orbit4 25s linear infinite;
 }
+
+/* Circuit Traces (Wires) */
+.circuit-trace {
+    position: absolute;
+    height: 2px;
+    width: var(--orbit-radius);
+    background: linear-gradient(90deg,
+            rgba(99, 102, 241, 0) 0%,
+            var(--accent-indigo) 50%,
+            rgba(99, 102, 241, 0) 100%);
+    transform-origin: left center;
+    left: 50%;
+    top: 50%;
+    filter: blur(1px);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.trace-1 {
+    animation: traceOrbit1 12s linear infinite, tracePulse 3s ease-in-out infinite;
+}
+
+.trace-2 {
+    animation: traceOrbit2 15s linear infinite, tracePulse 3s ease-in-out infinite 0.75s;
+}
+
+.trace-3 {
+    animation: traceOrbit3 20s linear infinite, tracePulse 3s ease-in-out infinite 1.5s;
+}
+
+.trace-4 {
+    animation: traceOrbit4 25s linear infinite, tracePulse 3s ease-in-out infinite 2.25s;
+}
+
+@keyframes tracePulse {
+
+    0%,
+    100% {
+        opacity: 0.1;
+        filter: blur(2px);
+    }
+
+    50% {
+        opacity: 0.8;
+        filter: blur(0px);
+        box-shadow: 0 0 15px var(--accent-indigo);
+    }
+}
+
+@keyframes traceOrbit1 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes traceOrbit2 {
+    0% {
+        transform: rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(450deg);
+    }
+}
+
+@keyframes traceOrbit3 {
+    0% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(540deg);
+    }
+}
+
+@keyframes traceOrbit4 {
+    0% {
+        transform: rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(630deg);
+    }
+}
+
 
 @keyframes floatCore {
 
@@ -1312,7 +1398,7 @@ textarea.form-control {
 
 @media (max-width: 480px) {
     :root {
-        --orbit-radius: 180px;
+        --orbit-radius: 188px;
     }
 
     .hero h1 {
