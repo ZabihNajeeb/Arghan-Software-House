@@ -13,7 +13,7 @@
     --text-secondary: #94a3b8;
     --glass-border: rgba(255, 255, 255, 0.1);
     --font-main: 'Outfit', sans-serif;
-    --orbit-radius: 280px;
+    --orbit-radius: 300px;
 }
 
 * {
@@ -450,8 +450,8 @@ nav .nav-inner {
 }
 
 .ring-3 {
-    width: 140%;
-    height: 140%;
+    width: 120%;
+    height: 120%;
     border: 3px dashed rgba(99, 102, 241, 0.6);
     border-radius: 50%;
     animation: spinReverse 45s linear infinite;
@@ -1312,7 +1312,7 @@ textarea.form-control {
 
 @media (max-width: 480px) {
     :root {
-        --orbit-radius: 210px;
+        --orbit-radius: 180px;
     }
 
     .hero h1 {
