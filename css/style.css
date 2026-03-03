@@ -122,12 +122,13 @@ nav .nav-inner {
 
 /* --- Hero Section --- */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
     padding-top: 6rem;
+    padding-bottom: 3rem;
 }
 
 .hero-wrapper {
@@ -1227,7 +1228,7 @@ textarea.form-control {
         justify-content: center;
         text-align: center;
         gap: 0;
-        padding-top: 5rem;
+        padding-top: 2rem;
     }
 
     .hero-content {
@@ -1246,6 +1247,7 @@ textarea.form-control {
 
     .hero-visual {
         transform: scale(0.65);
+        margin-top: 2rem;
     }
 }
 
