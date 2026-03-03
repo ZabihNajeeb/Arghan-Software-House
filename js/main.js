@@ -377,6 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     brandDiv.appendChild(wordSpan);
                 });
 
+                brandDiv.classList.add('reveal');
                 brandContainer.appendChild(brandDiv);
 
                 // 6. Global Corner Flash (Visual cue when scrolled away)

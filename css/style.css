@@ -683,7 +683,8 @@ nav .nav-inner {
 
 .letter-particle {
     display: inline-block;
-    font-size: 2.2rem;
+    font-size: clamp(1.2rem, 5vw, 2.22rem);
+    /* Dynamic fluid scaling */
     font-weight: 900;
     color: white;
     text-transform: uppercase;
@@ -717,13 +718,13 @@ nav .nav-inner {
 }
 
 .dynamic-brand-text.reveal {
-    animation: textMaterialize 5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: textMaterialize 7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes textMaterialize {
 
     0%,
-    90% {
+    85% {
         opacity: 1;
     }
 
@@ -755,7 +756,16 @@ nav .nav-inner {
     }
 
     .dynamic-brand-text {
-        font-size: 1.2rem;
+        gap: 0.1em;
+    }
+
+    .brand-word {
+        gap: 0.05em;
+        margin-right: 0.3em;
+    }
+
+    .letter-particle {
+        text-shadow: 0 0 8px rgba(99, 102, 241, 0.8);
     }
 
     .hero h1 {
