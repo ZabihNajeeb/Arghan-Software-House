@@ -269,5 +269,121 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     };
 
+    // --- Star Collision & Brand Reveal Logic ---
+    function initStarCollision() {
+        const collisionContainer = document.getElementById('collision-container');
+        const brandContainer = document.getElementById('brand-reveal-container');
+        if (!collisionContainer || !brandContainer) return;
+
+        const BRAND_NAME = "ARGHAND SOFTWARE HOUSE";
+
+        function triggerCollision() {
+            // 1. Setup Coordinates
+            const rect = collisionContainer.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // Random target within a ~120px radius from center
+            const angleTarget = Math.random() * Math.PI * 2;
+            const distTarget = Math.random() * 100;
+            const tx = centerX + Math.cos(angleTarget) * distTarget;
+            const ty = centerY + Math.sin(angleTarget) * distTarget;
+
+            // Start points on a perimeter (radius 350px)
+            const angle1 = Math.random() * Math.PI * 2;
+            const angle2 = angle1 + Math.PI + (Math.random() - 0.5) * 2; // Roughly opposite
+            const radiusStart = 350;
+
+            const s1x = centerX + Math.cos(angle1) * radiusStart;
+            const s1y = centerY + Math.sin(angle1) * radiusStart;
+            const s2x = centerX + Math.cos(angle2) * radiusStart;
+            const s2y = centerY + Math.sin(angle2) * radiusStart;
+
+            // 2. Create Star Particles
+            const star1 = document.createElement('div');
+            const star2 = document.createElement('div');
+            star1.className = 'star-particle';
+            star2.className = 'star-particle';
+
+            star1.style.left = `${s1x}px`;
+            star1.style.top = `${s1y}px`;
+            star2.style.left = `${s2x}px`;
+            star2.style.top = `${s2y}px`;
+
+            collisionContainer.appendChild(star1);
+            collisionContainer.appendChild(star2);
+
+            // 3. Animate to Collision
+            const travelTime = 1200; // 1.2 seconds travel
+
+            const animOptions = {
+                duration: travelTime,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                fill: 'forwards'
+            };
+
+            star1.animate([
+                { left: `${s1x}px`, top: `${s1y}px`, opacity: 0, transform: 'scale(0.5)' },
+                { opacity: 1, offset: 0.2 },
+                { left: `${tx}px`, top: `${ty}px`, opacity: 1, transform: 'scale(1.2)' }
+            ], animOptions);
+
+            star2.animate([
+                { left: `${s2x}px`, top: `${s2y}px`, opacity: 0, transform: 'scale(0.5)' },
+                { opacity: 1, offset: 0.2 },
+                { left: `${tx}px`, top: `${ty}px`, opacity: 1, transform: 'scale(1.2)' }
+            ], animOptions);
+
+            // 4. Collision Impact
+            setTimeout(() => {
+                star1.remove();
+                star2.remove();
+
+                // Create Flash
+                const flash = document.createElement('div');
+                flash.className = 'impact-flash';
+                flash.style.left = `${tx}px`;
+                flash.style.top = `${ty}px`;
+                flash.style.animation = 'flashIn 0.8s ease-out forwards';
+                collisionContainer.appendChild(flash);
+                setTimeout(() => flash.remove(), 1000);
+
+                // Create Sparks
+                for (let i = 0; i < 12; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'spark';
+                    spark.style.left = `${tx}px`;
+                    spark.style.top = `${ty}px`;
+                    collisionContainer.appendChild(spark);
+
+                    const sa = Math.random() * Math.PI * 2;
+                    const sd = 40 + Math.random() * 80;
+
+                    spark.animate([
+                        { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                        { transform: `translate(${Math.cos(sa) * sd}px, ${Math.sin(sa) * sd}px) scale(0)`, opacity: 0 }
+                    ], { duration: 800 + Math.random() * 400, easing: 'out' }).onfinish = () => spark.remove();
+                }
+
+                // 5. Reveal Text
+                brandContainer.innerHTML = ''; // Clear old text
+                const brandText = document.createElement('div');
+                brandText.className = 'dynamic-brand-text reveal';
+                brandText.style.left = `${tx}px`;
+                brandText.style.top = `${ty}px`;
+                brandText.innerText = BRAND_NAME;
+                brandContainer.appendChild(brandText);
+
+            }, travelTime);
+        }
+
+        // Run every 10 seconds
+        setInterval(triggerCollision, 10000);
+        // Initial trigger
+        setTimeout(triggerCollision, 2000);
+    }
+
+    initStarCollision();
+
     console.log('ARGHAN TECH Portal Initialized.');
 });

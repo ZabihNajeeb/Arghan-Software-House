@@ -13,7 +13,7 @@
     --text-secondary: #94a3b8;
     --glass-border: rgba(255, 255, 255, 0.1);
     --font-main: 'Outfit', sans-serif;
-    --orbit-radius: 312px;
+    --orbit-radius: 280px;
 }
 
 * {
@@ -450,8 +450,8 @@ nav .nav-inner {
 }
 
 .ring-3 {
-    width: 125%;
-    height: 125%;
+    width: 112%;
+    height: 112%;
     border: 3px dashed rgba(99, 102, 241, 0.4);
     border-radius: 50%;
     animation: spinReverse 45s linear infinite;
@@ -545,6 +545,124 @@ nav .nav-inner {
         opacity: 0.8;
         filter: blur(0px);
         box-shadow: 0 0 15px var(--accent-indigo);
+    }
+}
+
+/* --- Star Collision & Brand Reveal --- */
+.collision-container,
+.brand-reveal-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 25;
+}
+
+.star-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff, 0 0 20px var(--accent-indigo);
+    z-index: 30;
+}
+
+.impact-flash {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 50px 20px #fff, 0 0 100px 40px var(--accent-indigo);
+    opacity: 0;
+}
+
+.spark {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.dynamic-brand-text {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+    pointer-events: none;
+}
+
+.dynamic-brand-text.reveal {
+    animation: textMaterialize 5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes textMaterialize {
+    0% {
+        opacity: 0;
+        letter-spacing: 1em;
+        filter: blur(10px);
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    20% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    30% {
+        transform: translate(-50%, -50%) scale(1);
+        letter-spacing: 0.3em;
+    }
+
+    80% {
+        opacity: 1;
+        filter: blur(0px);
+        letter-spacing: 0.3em;
+    }
+
+    100% {
+        opacity: 0;
+        filter: blur(10px);
+        letter-spacing: 0.1em;
+    }
+}
+
+@keyframes flashIn {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --orbit-radius: 168px;
+    }
+
+    .dynamic-brand-text {
+        font-size: 1.2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.25rem;
     }
 }
 
