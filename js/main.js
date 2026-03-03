@@ -277,31 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const BRAND_NAME = "ARGHAND SOFTWARE HOUSE";
 
-        function spawnStar(startX, startY, targetX, targetY, isCollider = false) {
-            const star = document.createElement('div');
-            star.className = 'star-particle';
-
-            // Calculate travel angle for trail orientation
-            const angle = Math.atan2(targetY - startY, targetX - startX) * (180 / Math.PI);
-
-            star.style.left = `${startX}px`;
-            star.style.top = `${startY}px`;
-            star.style.transform = `rotate(${angle}deg)`;
-            collisionContainer.appendChild(star);
-
-            const travelTime = 2000 + Math.random() * 1000;
-            const anim = star.animate([
-                { left: `${startX}px`, top: `${startY}px`, opacity: 0 },
-                { opacity: 1, offset: 0.1 },
-                { left: `${targetX}px`, top: `${targetY}px`, opacity: 1 }
-            ], {
-                duration: travelTime,
-                easing: 'cubic-bezier(0.2, 0, 0.2, 1)',
-                fill: 'forwards'
-            });
-
-            return { star, anim, tx: targetX, ty: targetY, time: travelTime };
-        }
 
         function triggerCollision() {
             const rect = collisionContainer.getBoundingClientRect();
@@ -390,13 +365,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         const letterSpan = document.createElement('span');
                         letterSpan.className = 'letter-particle assemble';
                         letterSpan.innerText = letter;
-                        letterSpan.style.animationDelay = `${idx * 0.05}s`;
+                        letterSpan.style.animationDelay = `${idx * 0.03}s`;
                         wordSpan.appendChild(letterSpan);
                     });
                     brandDiv.appendChild(wordSpan);
                 });
 
                 brandContainer.appendChild(brandDiv);
+
+                // 6. Global Corner Flash (Visual cue when scrolled away)
+                const globalFlashContainer = document.getElementById('global-flash-container');
+                if (globalFlashContainer) {
+                    globalFlashContainer.innerHTML = '';
+                    const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+                    corners.forEach(corner => {
+                        const flash = document.createElement('div');
+                        flash.className = `corner-flash ${corner}`;
+                        globalFlashContainer.appendChild(flash);
+                        setTimeout(() => flash.remove(), 1000);
+                    });
+                }
 
             }, impactTime);
         }

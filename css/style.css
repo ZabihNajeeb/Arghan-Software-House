@@ -549,15 +549,65 @@ nav .nav-inner {
 }
 
 /* --- Star Collision & Brand Reveal --- */
-.collision-container,
-.brand-reveal-container {
+/* --- Global Collision Flash --- */
+.global-flash-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99999;
+}
+
+.corner-flash {
     position: absolute;
+    width: 250px;
+    height: 250px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.corner-flash.top-left {
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 25;
+    background: radial-gradient(circle at top left, var(--primary-light) 0%, transparent 70%);
+}
+
+.corner-flash.top-right {
+    top: 0;
+    right: 0;
+    background: radial-gradient(circle at top right, var(--accent-purple) 0%, transparent 70%);
+}
+
+.corner-flash.bottom-left {
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(circle at bottom left, var(--accent-indigo) 0%, transparent 70%);
+}
+
+.corner-flash.bottom-right {
+    bottom: 0;
+    right: 0;
+    background: radial-gradient(circle at bottom right, var(--primary-color) 0%, transparent 70%);
+}
+
+.corner-flash {
+    animation: cornerPulse 1s ease-out forwards;
+}
+
+@keyframes cornerPulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    30% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
 }
 
 .star-particle {
