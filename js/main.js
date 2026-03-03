@@ -125,7 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'SaaS POS System',
             desc: 'A comprehensive Point of Sale solution featuring advanced inventory management, real-time analytics, and automated licensing controls.',
             images: [
-                'assets/POS-Dashboard.png'
+                'assets/POS-Dashboard.png',
+                'assets/Quick POS.png'
             ],
             link: 'pos.html'
         },
