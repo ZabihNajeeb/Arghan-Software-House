@@ -14,7 +14,7 @@
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-grad: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
     --font-main: 'Outfit', sans-serif;
-    --orbit-radius: 230px;
+    --orbit-radius: 280px;
 }
 
 * {
@@ -346,9 +346,8 @@ nav .nav-inner {
 
 .tech-core {
     position: relative;
-    width: 100%;
-    max-width: 450px;
-    aspect-ratio: 1/1;
+    width: 550px;
+    height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1192,7 +1191,7 @@ textarea.form-control {
 /* --- Responsive --- */
 @media (max-width: 992px) {
     :root {
-        --orbit-radius: 180px;
+        --orbit-radius: 200px;
     }
 
     .hero {
@@ -1268,7 +1267,7 @@ textarea.form-control {
     }
 
     .hero-visual {
-        transform: scale(0.6);
+        transform: scale(0.7);
         margin-top: 2rem;
     }
 
@@ -1318,7 +1317,7 @@ textarea.form-control {
 
 @media (max-width: 480px) {
     :root {
-        --orbit-radius: 120px;
+        --orbit-radius: 140px;
     }
 
     .hero h1 {
@@ -1345,9 +1344,8 @@ textarea.form-control {
     }
 
     .tech-core {
-        width: 100%;
-        max-width: 280px;
-        height: auto;
+        width: 350px;
+        height: 350px;
     }
 
     .animated-brand {
