@@ -667,11 +667,15 @@ nav .nav-inner {
 .dynamic-brand-text {
     position: absolute;
     display: flex;
+    flex-wrap: wrap;
+    /* Allow multi-line */
+    justify-content: center;
+    /* Center lines */
     gap: 0.15em;
-    white-space: nowrap;
     pointer-events: none;
     z-index: 50;
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .brand-word {
@@ -683,8 +687,8 @@ nav .nav-inner {
 
 .letter-particle {
     display: inline-block;
-    font-size: clamp(1.2rem, 5vw, 2.22rem);
-    /* Dynamic fluid scaling */
+    font-size: clamp(1rem, 4.5vw, 2.2rem);
+    /* Slightly smaller base */
     font-weight: 900;
     color: white;
     text-transform: uppercase;
@@ -756,15 +760,19 @@ nav .nav-inner {
     }
 
     .dynamic-brand-text {
-        gap: 0.1em;
+        gap: 0.05em;
+        width: 250px;
+        /* Force wrap for 'SOFTWARE HOUSE' to second line */
     }
 
     .brand-word {
         gap: 0.05em;
-        margin-right: 0.3em;
+        margin-right: 0.2em;
     }
 
     .letter-particle {
+        font-size: 1.2rem;
+        /* Static size for small mobile for reliability */
         text-shadow: 0 0 8px rgba(99, 102, 241, 0.8);
     }
 
