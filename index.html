@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARGHAN TECH | Official Company Website</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <span>ARGHAN TECH</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#hero">Home</a>
+                    <a href="#ecosystem">Ecosystem</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+
+        <!-- Hero Background Image Full Width -->
+        <div class="hero-bg-image"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden;">
+            <img src="assets/arghand-dev.jpg" alt="Background Developers"
+                style="width: 100%; height: 100%; object-fit: cover; opacity: 30%; filter: grayscale(80%) blur(1px);">
+            <!-- Gradient Overlay -->
+            <div
+                style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10, 10, 12, 0.6) 0%, rgba(10, 10, 12, 1) 100%);">
+            </div>
+        </div>
+
+        <!-- Shooting Stars Interactive Layer -->
+        <div class="star-layer" style="z-index: 2;">
+            <div class="star-elem s1"></div>
+            <div class="star-elem s2"></div>
+            <div class="star-elem s3"></div>
+
+            <!-- Floating Chips -->
+            <div class="bg-microchip c1"><i class="fas fa-microchip"></i></div>
+            <div class="bg-microchip c2"><i class="fas fa-microchip"></i></div>
+            <div class="bg-microchip c3"><i class="fas fa-microchip"></i></div>
+            <div class="bg-microchip c4"><i class="fas fa-server"></i></div>
+            <div class="bg-microchip c5"><i class="fas fa-network-wired"></i></div>
+        </div>
+
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-content">
+                    <span class="badge">Next-Gen Software Solutions</span>
+                    <h1>Engineering the <br>Digital Future.</h1>
+                    <p>Welcome to Arghan Tech. We build high-performance, intelligent software ecosystems designed
+                        to
+                        empower modern enterprises and scale business operations globally.</p>
+                    <div class="cta-group">
+                        <a href="#ecosystem" class="btn btn-primary">Our Ecosystem</a>
+                        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    </div>
+                </div>
+
+                <!-- Animated Tech Visual -->
+                <div class="hero-visual">
+                    <div class="tech-core">
+                        <!-- Floating Brand Text Effect -->
+                        <div class="animated-brand">ARGHAN SOFTWARE HOUSE</div>
+
+                        <!-- Glowing Rings -->
+                        <div class="ring ring-1"></div>
+                        <div class="ring ring-2"></div>
+                        <div class="ring ring-3"></div>
+                        <!-- Central Microchip -->
+                        <div class="core-chip">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <!-- Floating Nodes -->
+                        <div class="floating-node node-1"><i class="fas fa-server"></i></div>
+                        <div class="floating-node node-2"><i class="fas fa-network-wired"></i></div>
+                        <div class="floating-node node-3"><i class="fas fa-database"></i></div>
+                        <div class="floating-node node-4"><i class="fas fa-shield-alt"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Ecosystem -->
+    <section id="ecosystem" class="section">
+        <div class="container">
+            <div class="section-head">
+                <div class="badge" style="margin-bottom: 1rem;">The Portfolio</div>
+                <h2>The ARGHAN Ecosystem</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">A unified collection of
+                    professional-grade software modules built for scale, security, and intelligence.</p>
+            </div>
+
+            <div class="grid" id="projectGrid">
+                <!-- POS Card -->
+                <div class="card" onclick="openProjectModal('saas-pos')">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800"
+                            alt="SaaS POS Dashboard">
+                        <div class="card-icon"><i class="fas fa-store-alt"></i></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>SaaS POS System</h3>
+                        <p>A comprehensive Point of Sale solution featuring advanced inventory management, real-time
+                            analytics, and automated licensing controls.</p>
+                        <div class="card-link"><span>Explore Module</span><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <!-- SuperAdmin Card -->
+                <div class="card" onclick="openProjectModal('control-center')">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=800"
+                            alt="Control Center Dashboard">
+                        <div class="card-icon"><i class="fas fa-server"></i></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Control Center</h3>
+                        <p>The global infrastructure layer for managing thousands of stores, license activations, and
+                            system-wide security protocols.</p>
+                        <div class="card-link"><span>Manage Grid</span><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <!-- Suppliers Card -->
+                <div class="card" onclick="openProjectModal('supply-chain')">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c663c0?auto=format&fit=crop&q=80&w=800"
+                            alt="Supply Chain Logistics">
+                        <div class="card-icon"><i class="fas fa-truck-loading"></i></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Supply Chain Hub</h3>
+                        <p>Optimized logistics and supplier management system designed to bridge the gap between
+                            procurement and inventory replenishment.</p>
+                        <div class="card-link"><span>Optimize Now</span><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <!-- School Management System -->
+                <div class="card" onclick="openProjectModal('school-management')">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800"
+                            alt="School Management">
+                        <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>School Management System</h3>
+                        <p>A unified digital campus platform streamlining administration, grading, attendance tracking,
+                            and parent-teacher communications.</p>
+                        <div class="card-link"><span>View Details</span><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <!-- Online Menu Header -->
+                <div class="card" onclick="openProjectModal('online-menu')">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800"
+                            alt="Restaurant Online Menu">
+                        <div class="card-icon"><i class="fas fa-utensils"></i></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Online Menu App</h3>
+                        <p>Interactive, dynamic dining application allowing seamless QR code ordering and real-time menu
+                            updates for restaurants.</p>
+                        <div class="card-link"><span>View Details</span><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <!-- Multi-Web Demo -->
+                <div class="card" onclick="openProjectModal('multi-web')">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+                            alt="Web Templates Demo">
+                        <div class="card-icon"><i class="fas fa-globe"></i></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Multi-Web Demo</h3>
+                        <p>A highly adaptable, scalable frontend framework designed for rapidly launching interconnected
+                            corporate websites and portals.</p>
+                        <div class="card-link"><span>View Details</span><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View More Button Container -->
+            <div style="text-align: center; margin-top: 4rem;">
+                <button id="showMoreBtn" class="btn btn-secondary"
+                    style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    View All Projects <i class="fas fa-chevron-down transition-icon"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customers Section -->
+    <section id="customers" class="section">
+        <div class="container">
+            <div class="section-head">
+                <div class="badge" style="margin-bottom: 1rem;">Who We Serve</div>
+                <h2>Our Customers</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Trusted by industry leaders
+                    and innovative companies across the globe.</p>
+            </div>
+
+            <div class="grid" id="customerGrid">
+                <!-- Customer 1 -->
+                <div class="card" onclick="openCustomerModal('cust-1')">
+                    <div class="card-image" style="height: 150px;">
+                        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=800"
+                            alt="TechNova Solutions">
+                    </div>
+                    <div class="card-content" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">TechNova Solutions</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">Enterprise cloud infrastructure partner.</p>
+                    </div>
+                </div>
+                <!-- Customer 2 -->
+                <div class="card" onclick="openCustomerModal('cust-2')">
+                    <div class="card-image" style="height: 150px;">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800"
+                            alt="Global Finance Inc.">
+                    </div>
+                    <div class="card-content" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">Global Finance Inc.</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">Worldwide investment and banking services.</p>
+                    </div>
+                </div>
+                <!-- Customer 3 -->
+                <div class="card" onclick="openCustomerModal('cust-3')">
+                    <div class="card-image" style="height: 150px;">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
+                            alt="Nexus Retail Group">
+                    </div>
+                    <div class="card-content" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">Nexus Retail Group</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">International e-commerce and retail chain.</p>
+                    </div>
+                </div>
+                <!-- Customer 4 -->
+                <div class="card" onclick="openCustomerModal('cust-4')">
+                    <div class="card-image" style="height: 150px;">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800"
+                            alt="AeroSpace Dynamics">
+                    </div>
+                    <div class="card-content" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">AeroSpace Dynamics</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">Aviation and space exploration technology.</p>
+                    </div>
+                </div>
+                <!-- Customer 5 -->
+                <div class="card" onclick="openCustomerModal('cust-5')">
+                    <div class="card-image" style="height: 150px;">
+                        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800"
+                            alt="OmniHealth Systems">
+                    </div>
+                    <div class="card-content" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">OmniHealth Systems</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">Next-generation healthcare providers.</p>
+                    </div>
+                </div>
+                <!-- Customer 6 -->
+                <div class="card" onclick="openCustomerModal('cust-6')">
+                    <div class="card-image" style="height: 150px;">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800"
+                            alt="Vertex Logistics">
+                    </div>
+                    <div class="card-content" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.25rem;">Vertex Logistics</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">Global shipping and supply chain network.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section" style="background: rgba(10, 10, 12, 0.5); position: relative;">
+        <!-- Background decorative elements -->
+        <div class="orb orb-1" style="top: 20%; right: 10%; width: 300px; height: 300px; opacity: 0.15;"></div>
+        <div class="orb orb-2" style="bottom: 10%; left: 10%; width: 400px; height: 400px; opacity: 0.15;"></div>
+
+        <div class="container">
+            <div class="section-head">
+                <div class="badge" style="margin-bottom: 1rem;">Get In Touch</div>
+                <h2>Let's Talk About Your Next Big Idea</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Whether you have a question
+                    about our ecosystem, need technical support, or want to discuss a custom solution, our team is ready
+                    to help.</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="contact-info-panel">
+                    <h3>Reach Out Directly</h3>
+                    <p>We typically respond within 1-2 business hours.</p>
+
+                    <ul class="contact-list">
+                        <li>
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-text">
+                                <strong>Global Headquarters</strong>
+                                <span>123 Innovation Drive, Tech District, City building 45</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-text">
+                                <strong>Email Address</strong>
+                                <span>contact@arghantech.com</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-text">
+                                <strong>Phone Number</strong>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="contact-form-panel">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="john@company.com"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="How can we help you?"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" rows="5"
+                                placeholder="Tell us more about your inquiry..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; justify-content: center; display: flex; gap: 0.5rem; align-items: center;">
+                            Send Message <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <div id="formStatus" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div class="footer-col brand-col">
+                    <a href="#" class="logo" style="margin-bottom: 1.5rem;">
+                        <div class="logo-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <span>ARGHAN TECH</span>
+                    </a>
+                    <p class="footer-desc">
+                        Engineering the digital future with high-performance, intelligent software ecosystems designed
+                        to empower modern enterprises globally.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#ecosystem">Our Ecosystem</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact Support</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Modules -->
+                <div class="footer-col">
+                    <h4>Our Modules</h4>
+                    <ul>
+                        <li><a href="../SaaS_POS_System">SaaS POS System</a></li>
+                        <li><a href="../SuperAdminSystem">Control Center</a></li>
+                        <li><a href="../Suppliers">Supply Chain Hub</a></li>
+                        <li><a href="#">Enterprise Licensing</a></li>
+                        <li><a href="#">Security Protocols</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Innovation Drive, Tech District, City building 45</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@arghantech.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 Arghan Tech Solutions. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Fullscreen Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-overlay" onclick="closeProjectModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProjectModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Project Title</h2>
+                    <p id="modalDesc">Project description goes here.</p>
+                    <div class="modal-action" style="margin-top: 1.5rem;">
+                        <a href="#" id="modalLiveLink" class="btn btn-primary" target="_blank">Visit Live Project <i
+                                class="fas fa-external-link-alt" style="margin-left: 0.5rem;"></i></a>
+                    </div>
+                </div>
+                <div class="modal-gallery" id="modalGallery">
+                    <!-- Images will be injected here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Modal -->
+    <div id="customerModal" class="project-modal">
+        <div class="modal-overlay" onclick="closeCustomerModal()"></div>
+        <div class="modal-content" style="max-width: 600px; height: auto; max-height: 90vh;">
+            <button class="modal-close" onclick="closeCustomerModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-body" style="padding: 2rem;">
+                <img id="custModalImg" src="" alt="Customer Image"
+                    style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--glass-border);">
+                <h2 id="custModalTitle" style="color: white; margin-bottom: 0.5rem; font-size: 2rem;">Customer Name</h2>
+                <p id="custModalDesc" style="color: var(--text-secondary); line-height: 1.6; font-size: 1rem;">Customer
+                    description focusing on their partnership journey with Arghan Tech.</p>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; align-items: center;">
+                    <i class="fas fa-globe" style="color: var(--primary-light);"></i>
+                    <a href="#" id="custModalLink" target="_blank"
+                        style="color: var(--primary-light); text-decoration: none; font-weight: bold; transition: color 0.3s ease;">Visit
+                        Website</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
