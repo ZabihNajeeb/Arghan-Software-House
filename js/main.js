@@ -277,73 +277,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const BRAND_NAME = "ARGHAND SOFTWARE HOUSE";
 
-        function triggerCollision() {
-            // 1. Setup Coordinates
-            const rect = collisionContainer.getBoundingClientRect();
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+        function spawnStar(startX, startY, targetX, targetY, isCollider = false) {
+            const star = document.createElement('div');
+            star.className = 'star-particle';
 
-            // Random target within the visualized core area
-            const angleTarget = Math.random() * Math.PI * 2;
-            const distTarget = Math.random() * 80;
-            const tx = centerX + Math.cos(angleTarget) * distTarget;
-            const ty = centerY + Math.sin(angleTarget) * distTarget;
+            // Calculate travel angle for trail orientation
+            const angle = Math.atan2(targetY - startY, targetX - startX) * (180 / Math.PI);
 
-            // Start points far outside (radius 600px)
-            const angle1 = Math.random() * Math.PI * 2;
-            const angle2 = angle1 + Math.PI + (Math.random() - 0.2) * 0.4;
-            const radiusStart = 600;
+            star.style.left = `${startX}px`;
+            star.style.top = `${startY}px`;
+            star.style.transform = `rotate(${angle}deg)`;
+            collisionContainer.appendChild(star);
 
-            const s1x = centerX + Math.cos(angle1) * radiusStart;
-            const s1y = centerY + Math.sin(angle1) * radiusStart;
-            const s2x = centerX + Math.cos(angle2) * radiusStart;
-            const s2y = centerY + Math.sin(angle2) * radiusStart;
-
-            // Calculate rotation for trails
-            const rot1 = Math.atan2(ty - s1y, tx - s1x) * (180 / Math.PI);
-            const rot2 = Math.atan2(ty - s2y, tx - s2x) * (180 / Math.PI);
-
-            // 2. Create Star Particles
-            const star1 = document.createElement('div');
-            const star2 = document.createElement('div');
-            star1.className = 'star-particle';
-            star2.className = 'star-particle';
-
-            star1.style.left = `${s1x}px`;
-            star1.style.top = `${s1y}px`;
-            star1.style.transform = `rotate(${rot1}deg)`;
-            star2.style.left = `${s2x}px`;
-            star2.style.top = `${s2y}px`;
-            star2.style.transform = `rotate(${rot2}deg)`;
-
-            collisionContainer.appendChild(star1);
-            collisionContainer.appendChild(star2);
-
-            // 3. Animate to Collision
-            const travelTime = 1500; // 1.5 seconds travel for longer distance
-
-            const animOptions = {
+            const travelTime = 2000 + Math.random() * 1000;
+            const anim = star.animate([
+                { left: `${startX}px`, top: `${startY}px`, opacity: 0 },
+                { opacity: 1, offset: 0.1 },
+                { left: `${targetX}px`, top: `${targetY}px`, opacity: 1 }
+            ], {
                 duration: travelTime,
                 easing: 'cubic-bezier(0.2, 0, 0.2, 1)',
                 fill: 'forwards'
-            };
+            });
 
-            star1.animate([
-                { left: `${s1x}px`, top: `${s1y}px`, opacity: 0 },
-                { opacity: 1, offset: 0.1 },
-                { left: `${tx}px`, top: `${ty}px`, opacity: 1 }
-            ], animOptions);
+            return { star, anim, tx: targetX, ty: targetY, time: travelTime };
+        }
 
-            star2.animate([
-                { left: `${s2x}px`, top: `${s2y}px`, opacity: 0 },
-                { opacity: 1, offset: 0.1 },
-                { left: `${tx}px`, top: `${ty}px`, opacity: 1 }
-            ], animOptions);
+        function triggerCollision() {
+            const rect = collisionContainer.getBoundingClientRect();
+            const w = rect.width;
+            const h = rect.height;
 
-            // 4. Collision Impact
+            // 1. Pick a safe Impact Point (tx, ty) 
+            // Avoid top-left (0-40% width, 0-60% height) where hero text usually sits
+            let tx, ty;
+            do {
+                tx = Math.random() * w;
+                ty = Math.random() * h;
+            } while (tx < w * 0.4 && ty < h * 0.6);
+
+            // 2. Spawn 2 Coliding Stars
+            const collisionStars = [];
+            for (let i = 0; i < 2; i++) {
+                // Spawn on a large perimeter
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 1000;
+                const sx = (w / 2) + Math.cos(angle) * dist;
+                const sy = (h / 2) + Math.sin(angle) * dist;
+
+                collisionStars.push(spawnStar(sx, sy, tx, ty, true));
+            }
+
+            // 3. Spawn 3 Decoy Stars (Ambient)
+            for (let i = 0; i < 3; i++) {
+                const angleS = Math.random() * Math.PI * 2;
+                const sx = (w / 2) + Math.cos(angleS) * 1000;
+                const sy = (h / 2) + Math.sin(angleS) * 1000;
+
+                const angleT = Math.random() * Math.PI * 2;
+                const targetX = (w / 2) + Math.cos(angleT) * 1000;
+                const targetY = (h / 2) + Math.sin(angleT) * 1000;
+
+                spawnStar(sx, sy, targetX, targetY, false);
+            }
+
+            // 4. Handle Impact (using most consistent travel time)
+            const impactTime = collisionStars[0].time;
+
             setTimeout(() => {
-                star1.remove();
-                star2.remove();
+                // Remove stars
+                collisionStars.forEach(s => s.star.remove());
+
+                // Cleanup decoys (rough estimate)
+                setTimeout(() => {
+                    document.querySelectorAll('.star-particle').forEach(s => s.remove());
+                }, 1000);
 
                 // Create Flash
                 const flash = document.createElement('div');
@@ -351,12 +359,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 flash.style.left = `${tx}px`;
                 flash.style.top = `${ty}px`;
                 flash.style.transform = 'translate(-50%, -50%)';
-                flash.style.animation = 'flashIn 1s ease-out forwards';
+                flash.style.animation = 'flashIn 1.2s ease-out forwards';
                 collisionContainer.appendChild(flash);
-                setTimeout(() => flash.remove(), 1200);
+                setTimeout(() => flash.remove(), 1500);
 
                 // Create Sparks
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 25; i++) {
                     const spark = document.createElement('div');
                     spark.className = 'spark';
                     spark.style.left = `${tx}px`;
@@ -364,16 +372,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     collisionContainer.appendChild(spark);
 
                     const sa = Math.random() * Math.PI * 2;
-                    const sd = 50 + Math.random() * 150;
+                    const sd = 60 + Math.random() * 200;
 
                     spark.animate([
                         { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
                         { transform: `translate(${-50 + Math.cos(sa) * sd}px, ${-50 + Math.sin(sa) * sd}px) scale(0)`, opacity: 0 }
-                    ], { duration: 1000 + Math.random() * 500, easing: 'ease-out' }).onfinish = () => spark.remove();
+                    ], { duration: 1200 + Math.random() * 600, easing: 'ease-out' }).onfinish = () => spark.remove();
                 }
 
                 // 5. Reveal Text
-                brandContainer.innerHTML = ''; // Strict clear
+                brandContainer.innerHTML = '';
                 const brandText = document.createElement('div');
                 brandText.className = 'dynamic-brand-text reveal';
                 brandText.style.left = `${tx}px`;
@@ -381,12 +389,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 brandText.innerText = BRAND_NAME;
                 brandContainer.appendChild(brandText);
 
-            }, travelTime);
+            }, impactTime);
         }
 
-        // Run every 10 seconds accurately
         setInterval(triggerCollision, 10000);
-        // Initial trigger after short delay
         setTimeout(triggerCollision, 1000);
     }
 
