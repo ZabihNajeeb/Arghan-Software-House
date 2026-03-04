@@ -13,7 +13,7 @@
     --text-secondary: #94a3b8;
     --glass-border: rgba(255, 255, 255, 0.1);
     --font-main: 'Outfit', sans-serif;
-    --orbit-radius: 160px;
+    --orbit-radius: 300px;
 }
 
 * {
@@ -399,8 +399,8 @@ nav .nav-inner {
 /* --- Earth Core High-Fidelity Upgrade --- */
 .earth-container {
     position: absolute;
-    width: 220px;
-    height: 220px;
+    width: 440px;
+    height: 440px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -464,7 +464,7 @@ nav .nav-inner {
 
 .earth-atmosphere {
     position: absolute;
-    inset: -25px;
+    inset: -50px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 50%, transparent 70%);
     box-shadow: 0 0 70px rgba(79, 70, 229, 0.5), inset 0 0 30px rgba(79, 70, 229, 0.3);
@@ -475,7 +475,7 @@ nav .nav-inner {
 
 .earth-glow {
     position: absolute;
-    inset: -60px;
+    inset: -120px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.05) 50%, transparent 70%);
     filter: blur(40px);
@@ -1034,6 +1034,7 @@ nav .nav-inner {
     margin-bottom: 2rem;
     background: linear-gradient(to right, #fff, #94a3b8);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: fadeInUp 1s ease 0.2s both;
 }
