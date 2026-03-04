@@ -405,7 +405,7 @@ nav .nav-inner {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 30;
-    perspective: 1000px;
+    opacity: 0.3;
 }
 
 .earth-sphere {
