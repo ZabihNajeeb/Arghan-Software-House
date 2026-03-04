@@ -297,11 +297,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const tx = centerX + (Math.random() - 0.5) * 100;
             const ty = centerY + (Math.random() - 0.5) * 100;
 
-            // 2. Spawn exactly 2 Collider Stars
+            // 2. Spawn exactly 2 Collider Stars from opposite sides
             const collisionStars = [];
+            const baseAngle = Math.random() * Math.PI * 2;
+
             for (let i = 0; i < 2; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const dist = 1200; // Far start
+                const angle = (i === 0) ? baseAngle : baseAngle + Math.PI; // Perfectly opposite
+                const dist = 1400; // Far start
                 const sx = (w / 2) + Math.cos(angle) * dist;
                 const sy = (h / 2) + Math.sin(angle) * dist;
 
@@ -313,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 star.style.transform = `rotate(${rot}deg)`;
                 collisionContainer.appendChild(star);
 
-                const travelTime = 1800; // Constant time = constant speed (linear)
+                const travelTime = 3500; // Slower speed (was 1800ms)
                 star.animate([
                     { left: `${sx}px`, top: `${sy}px`, opacity: 0 },
                     { opacity: 1, offset: 0.1 },
