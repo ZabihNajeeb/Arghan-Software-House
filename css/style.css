@@ -1724,7 +1724,8 @@ textarea.form-control {
 
 @media (max-width: 480px) {
     :root {
-        --orbit-radius: 188px;
+        --orbit-radius: 400px;
+        /* Increased to stay outside larger Earth */
     }
 
     .hero h1 {
@@ -1746,7 +1747,8 @@ textarea.form-control {
     }
 
     .hero-visual {
-        transform: scale(0.4);
+        transform: scale(0.5);
+        /* Scaled for 440px Earth */
         margin-top: 1rem;
     }
 
