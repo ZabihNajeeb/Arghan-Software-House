@@ -412,20 +412,31 @@ nav .nav-inner {
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #6366f1 0%, #1e1b4b 60%, #0a0a0c 100%);
-    box-shadow: inset -30px -30px 60px rgba(0, 0, 0, 0.9),
-        inset 15px 15px 40px rgba(255, 255, 255, 0.1);
+    /* Dramatic day/night shading */
+    background: radial-gradient(circle at 35% 35%,
+            #6366f1 0%,
+            #1e1b4b 50%,
+            #0a0a0c 80%);
+    box-shadow: inset -20px -20px 50px rgba(0, 0, 0, 0.95),
+        inset 10px 10px 30px rgba(255, 255, 255, 0.15),
+        0 0 50px rgba(99, 102, 241, 0.3);
     overflow: hidden;
     transform-style: preserve-3d;
 }
 
-/* Realistic World Map Pattern - high fidelity blue marble */
-background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Solarsystemscope_texture_2k_earth_daymap.jpg/2560px-Solarsystemscope_texture_2k_earth_daymap.jpg');
-background-size: 200% 100%;
-opacity: 0.8;
-mix-blend-mode: normal;
-filter: brightness(1.1) contrast(1.1) hue-rotate(-10deg);
-animation: rotateEarth 30s linear infinite;
+.earth-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    /* Realistic World Map Pattern - high fidelity blue marble */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Solarsystemscope_texture_2k_earth_daymap.jpg/2560px-Solarsystemscope_texture_2k_earth_daymap.jpg');
+    background-size: 200% 100%;
+    opacity: 0.85;
+    mix-blend-mode: normal;
+    filter: brightness(1.2) contrast(1.1) hue-rotate(-5deg);
+    animation: rotateEarth 10s linear infinite;
 }
 
 .earth-clouds {
@@ -922,31 +933,72 @@ animation: rotateEarth 30s linear infinite;
 
 @keyframes orbit1 {
     0% {
-        transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
+        transform: rotateX(25deg) rotateY(0deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(0deg) rotateX(-25deg);
+        z-index: 45;
+        /* Front */
+    }
+
+    50% {
+        transform: rotateX(25deg) rotateY(180deg) translateX(var(--orbit-radius)) translateZ(-10px) rotateY(-180deg) rotateX(-25deg);
+        z-index: 25;
+        /* Behind */
     }
 
     100% {
-        transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
+        transform: rotateX(25deg) rotateY(360deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(-360deg) rotateX(-25deg);
+        z-index: 45;
+        /* Front */
     }
 }
 
 @keyframes orbit2 {
     0% {
-        transform: rotate(90deg) translateX(var(--orbit-radius)) rotate(-90deg);
+        transform: rotateX(-35deg) rotateY(90deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(-90deg) rotateX(35deg);
+        z-index: 45;
+    }
+
+    50% {
+        transform: rotateX(-35deg) rotateY(270deg) translateX(var(--orbit-radius)) translateZ(-10px) rotateY(-270deg) rotateX(35deg);
+        z-index: 25;
     }
 
     100% {
-        transform: rotate(450deg) translateX(var(--orbit-radius)) rotate(-450deg);
+        transform: rotateX(-35deg) rotateY(450deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(-450deg) rotateX(35deg);
+        z-index: 45;
     }
 }
 
 @keyframes orbit3 {
     0% {
-        transform: rotate(180deg) translateX(var(--orbit-radius)) rotate(-180deg);
+        transform: rotateX(15deg) rotateY(180deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(-180deg) rotateX(-15deg);
+        z-index: 45;
+    }
+
+    50% {
+        transform: rotateX(15deg) rotateY(360deg) translateX(var(--orbit-radius)) translateZ(-10px) rotateY(-360deg) rotateX(-15deg);
+        z-index: 25;
     }
 
     100% {
-        transform: rotate(540deg) translateX(var(--orbit-radius)) rotate(-540deg);
+        transform: rotateX(15deg) rotateY(540deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(-540deg) rotateX(-15deg);
+        z-index: 45;
+    }
+}
+
+@keyframes orbit4 {
+    0% {
+        transform: rotateX(-50deg) rotateY(270deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(-270deg) rotateX(50deg);
+        z-index: 45;
+    }
+
+    50% {
+        transform: rotateX(-50deg) rotateY(450deg) translateX(var(--orbit-radius)) translateZ(-10px) rotateY(-450deg) rotateX(50deg);
+        z-index: 25;
+    }
+
+    100% {
+        transform: rotateX(-50deg) rotateY(630deg) translateX(var(--orbit-radius)) translateZ(10px) rotateY(-630deg) rotateX(50deg);
+        z-index: 45;
     }
 }
 
